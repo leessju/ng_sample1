@@ -6,15 +6,15 @@ import { Post } from '../models/Post';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
-}
+};
 
 @Injectable()
 export class PostService {
-  postsUrl: string = 'https://jsonplaceholder.typicode.com/posts';
+  postsUrl = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: HttpClient) { }
 
-  getPosts() : Observable<Post[]> {
+  getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postsUrl);
   }
 
@@ -22,13 +22,13 @@ export class PostService {
     return this.http.post<Post>(this.postsUrl, post, httpOptions);
   }
 
-  updatePost(post: Post) :Observable<Post> {
+  updatePost(post: Post): Observable<Post> {
     const url = `${this.postsUrl}/${post.id}`;
 
     return this.http.put<Post>(url, post, httpOptions);
   }
 
-  getPost(id: number) :Observable<Post> {
+  getPost(id: number): Observable<Post> {
     const url = `${this.postsUrl}/${id}`;
 
     return this.http.get<Post>(url);

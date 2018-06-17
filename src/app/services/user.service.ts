@@ -9,7 +9,7 @@ export class UserService {
   users: User[];
   data: Observable<any>;
 
-  constructor() { 
+  constructor() {
     this.users = [
       {
         firstName: 'John',
