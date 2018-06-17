@@ -14,12 +14,12 @@ export class PostsComponent implements OnInit {
     id: 0,
     title: '',
     body: ''
-  }
-  isEdit: boolean = false;
+  };
+  isEdit = false;
 
   constructor(private postService: PostService) { }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
     });
@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
 
   onUpdatedPost(post: Post) {
     this.posts.forEach((cur, index) => {
-      if(post.id === cur.id) {
+      if (post.id === cur.id) {
         this.posts.splice(index, 1);
         this.posts.unshift(post);
         this.isEdit = false;
@@ -44,21 +44,20 @@ export class PostsComponent implements OnInit {
           id: 0,
           title: '',
           body: ''
-        }
+        };
       }
     });
   }
 
   removePost(post: Post) {
-    if(confirm('Are You Sure?')) {
+    if (confirm('Are You Sure?')) {
       this.postService.removePost(post.id).subscribe(() => {
         this.posts.forEach((cur, index) => {
-          if(post.id === cur.id) {
-            this.posts.splice(index, 1);  
+          if (post.id === cur.id) {
+            this.posts.splice(index, 1);
           }
         });
       });
     }
   }
-
 }
