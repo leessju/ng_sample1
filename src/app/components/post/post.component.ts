@@ -10,16 +10,22 @@ import { Post } from '../../models/Post';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post: Post;
+    post: Post;
+    postid: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private postService: PostService
-  ) { }
+    constructor(
+        private route: ActivatedRoute,
+        private postService: PostService) {
 
-  ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.postService.getPost(id).subscribe(post => this.post = post);
-  }
+        this.route.params.subscribe(params => this.postid = params.id);
 
+        console.log(`post id : ${this.postid} _ constructor`);
+    }
+
+    ngOnInit() {
+        const id = +this.route.snapshot.paramMap.get('id');
+        console.log(`post id : ${this.postid} _ init`);
+
+        this.postService.getPost(id).subscribe(post => this.post = post);
+    }
 }
